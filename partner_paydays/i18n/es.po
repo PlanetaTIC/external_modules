@@ -43,6 +43,12 @@ msgid "Holidays"
 msgstr "Vacaciones"
 
 #. module: partner_paydays
+#: code:addons/partner_paydays/models/partner_paydays.py:68
+#, python-format
+msgid "Holidays start cannot be previous to end holidays date"
+msgstr "La fecha inicial de las vacaciones no puede ser anterior a su fecha final"
+
+#. module: partner_paydays
 #: model:ir.model.fields,field_description:partner_paydays.field_res_partner_holidays_id
 msgid "ID"
 msgstr "ID"
@@ -109,9 +115,21 @@ msgid "Pays During Holidays"
 msgstr "Paga durante las vacaciones"
 
 #. module: partner_paydays
+#: model:ir.model.fields,field_description:partner_paydays.field_res_partner_holidays__recurrent
+msgid "Recurrent"
+msgstr "Recurrente"
+
+#. module: partner_paydays
 #: model:ir.model.fields,field_description:partner_paydays.field_res_partner_holidays_start
 msgid "Start"
 msgstr "Inicio"
+
+#. module: partner_paydays
+#: model:ir.actions.server,name:partner_paydays.ir_cron_update_payment_holidays_ir_actions_server
+#: model:ir.cron,cron_name:partner_paydays.ir_cron_update_payment_holidays
+#: model:ir.cron,name:partner_paydays.ir_cron_update_payment_holidays
+msgid "Update payment holidays"
+msgstr "Actualizar vacaciones de pago"
 
 #. module: partner_paydays
 #: model:ir.model,name:partner_paydays.model_res_partner_holidays

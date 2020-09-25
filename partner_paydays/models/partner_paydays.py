@@ -57,6 +57,16 @@ class ResPartnerHolidays(models.Model):
     )
     start = fields.Date("Start", required=True)
     end = fields.Date("End", required=True)
+    recurrent = fields.Boolean("Recurrent", default=False)
+
+    @api.constrains("start", "end")
+    def _check_holidays_period(self):
+        for holidays in self:
+            if holidays.start and holidays.end\
+                    and holidays.start > holidays.end:
+                raise exceptions.ValidationError(
+                    _("Holidays start cannot be previous to end holidays date")
+                )
 
     @api.multi
     def name_get(self):
@@ -64,6 +74,26 @@ class ResPartnerHolidays(models.Model):
         for record in self:
             result.append((record.id, "%s - %s" % (record.start, record.end)))
         return result
+
+    @api.model
+    def update_payment_holidays(self):
+
+        today = datetime.today()
+        past_holidays = self.search([
+            ("start", "!=", False),
+            ("end", "<", today),
+            ("recurrent", "=", True),
+        ])
+        for holidays in past_holidays:
+            next_holiday_start = holidays.start.replace(
+                year=holidays.start.year + 1)
+            next_holiday_end = holidays.end.replace(
+                year=holidays.end.year + 1)
+            holidays.copy(default={
+                "start": next_holiday_start,
+                "end": next_holiday_end,
+            })
+        return True
 
 
 class AccountPaymentTerm(models.Model):

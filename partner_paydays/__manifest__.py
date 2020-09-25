@@ -15,6 +15,7 @@ vacations if the partner doesn't pay during that period.""",
         "views/partner_paydays_view.xml",
         "views/account_invoice.xml",
         "security/ir.model.access.csv",
+        "data/update_payment_holidays_data.xml",
     ],
     "installable": True,
 }

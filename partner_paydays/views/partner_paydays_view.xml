@@ -18,11 +18,13 @@
                                 <group>
                                     <field name="start"/>
                                     <field name="end"/>
+                                    <field name="recurrent"/>
                                 </group>
                             </form>
                             <tree string="Holidays">
                                 <field name="start"/>
                                 <field name="end"/>
+                                <field name="recurrent"/>
                             </tree>
                         </field>
                     </group>
